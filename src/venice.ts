@@ -14,7 +14,7 @@ function parseExplanation(content: unknown): Explanation {
 export async function explainTerm(term: string, env: Env, fetcher: typeof fetch = fetch): Promise<Explanation> {
   const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const response = await fetcher(VENICE_URL, { method: "POST", headers: { Authorization: `Bearer ${env.VENICE_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ model: env.VENICE_MODEL || "qwen3-5-9b", messages: buildMessages(term), max_tokens: 300, temperature: 0.3 }), signal: controller.signal });
+    const response = await fetcher(VENICE_URL, { method: "POST", headers: { Authorization: `Bearer ${env.VENICE_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ model: env.VENICE_MODEL || "qwen3-5-9b", messages: buildMessages(term), max_tokens: 300, temperature: 0.3, venice_parameters: { disable_thinking: true, strip_thinking_response: true } }), signal: controller.signal });
     if (response.status === 401) throw new VeniceError("auth");
     if (response.status === 429) throw new VeniceError("rate_limit");
     if (response.status >= 500 || !response.ok) throw new VeniceError("upstream");
