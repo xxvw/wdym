@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "wdym",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-09",
+  "vars": { "ENVIRONMENT": "development", "VENICE_MODEL": "qwen3-5-9b" },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "env": {
+    "staging": {
+      "name": "wdym-staging",
+      "vars": { "ENVIRONMENT": "staging", "VENICE_MODEL": "qwen3-5-9b" },
+      "observability": { "enabled": true, "head_sampling_rate": 1 }
+    }
+  }
+}

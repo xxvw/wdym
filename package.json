@@ -1,0 +1,30 @@
+{
+  "name": "wdym",
+  "version": "1.0.0",
+  "description": "Discord bot that explains internet slang in Japanese.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run",
+    "generate-types": "wrangler types",
+    "typecheck": "pnpm generate-types && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "register-command": "tsx scripts/register-command.ts"
+  },
+  "keywords": [
+    "discord",
+    "cloudflare-workers",
+    "slang"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.1.6",
+    "@types/node": "^26.5.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.130.0"
+  }
+}
